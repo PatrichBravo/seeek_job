@@ -78,22 +78,52 @@ class BrowserAutomation:
         sleep(2)
         
         
-    def scraper_job_and_apply(self):
-        
+    def scraper_job(self):
+        self.rows = []
         for i in range (1,23):
             
             try:
                 jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
                 jobs.click()
-                
-                quickapply = self.driver.find_element("/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div/div/div[1]/div/a")
-                if quickapply == True:
-                    quickapply.click()
-                else:
-                    pass
-                
+                sleep(2)
+                jobs_href = jobs.get_attribute("href")
+                self.rows.append(jobs_href)
+                sleep(2)
+                print(self.rows)
             except Exception as e:
-                print(f"Error while processing job {i}: {e}")
+                print(f"Error while processing job {i}: {e}")                        
+        else:
+                pass
+            
+            
+    def apply_jobs(self):
+        for row in self.rows:
+            self.driver.get(row)
+            sleep(5)
+            try:
+            # Wait for all "job-detail-apply" buttons to be present
+                buttons = W(self.driver, 10).until(
+                EC.presence_of_all_elements_located((By.XPATH, "//a[@data-automation='job-detail-apply']")))
+    
+                for button in buttons:
+                    # Check the text content of each button
+                    if "Quick apply" in button.text:
+                    # Scroll into view and click the correct button
+                        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+                        button.click()
+                        print("Quick Apply button clicked successfully!")
+                        sleep(5)
+                    return  print("No 'Quick Apply' button found.")# Exit after clicking the correct button
+                        
+            except Exception as e:
+                print(f"Could not find or click the Quick Apply button: {e}")
+                    # quickapply = self.driver.find_element("/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div/div/div[1]/div/a")
+                    # sleep(2)
+                    #if quickapply == True:
+                    #    quickapply.click()
+                    #    sleep(2)
+                    #else:
+                    #    pass
 
         
     def next_page(self):
@@ -162,6 +192,9 @@ if __name__ == "__main__":
         # Search jobs
         print("Searching your deamer job...")
         automation.search_jobs()
+        automation.scraper_job()
+        automation.apply_jobs()
+        sleep(5)
 
         # Asking ChatGPT
         print("Asking ChatGPT...")
