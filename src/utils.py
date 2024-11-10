@@ -4,7 +4,7 @@ import random
 from selenium import webdriver
 from src.logging import logger
 
-chromeProfilePath = os.path.join(os.getcwd(), "chrome_profile", "linkedin_profile")
+chromeProfilePath = os.path.join(os.getcwd(), "chrome_profile", "seek_profile")
 
 def ensure_chrome_profile():
     logger.debug(f"Ensuring Chrome profile exists at path: {chromeProfilePath}")

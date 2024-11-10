@@ -1,2 +1,2 @@
 work = "Data analyst"
-location = "Australia"
+location_user = "Australia"

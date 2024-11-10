@@ -9,3 +9,37 @@
 2024-11-09 17:03:43.358 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
 2024-11-09 17:03:43.359 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
 2024-11-09 17:03:43.359 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:12:27.053 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:12:27.053 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:12:27.053 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:18:09.032 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:18:09.032 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:18:09.033 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:21:16.394 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:21:16.395 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:21:16.397 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:23:38.645 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:23:38.646 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:23:38.646 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:28:54.174 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:28:54.175 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:28:54.175 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/linkedin_profile
+2024-11-09 21:36:25.122 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:36:25.123 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:36:25.123 | DEBUG    | src.utils:ensure_chrome_profile:17 - Created Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:36:25.123 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:44:46.813 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:44:46.813 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:44:46.813 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:52:36.761 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 21:52:36.763 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 21:52:36.764 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:02:01.432 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 22:02:01.432 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:02:01.432 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:09:04.621 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 22:09:04.622 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:09:04.622 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:12:26.518 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-09 22:12:26.519 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-09 22:12:26.519 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile

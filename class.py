@@ -14,7 +14,11 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.service import Service as ChromeService
 from src.utils import chrome_browser_options
 import csv 
-from src.user_config import work
+from src.user_config import work,location_user
+import openai
+from src.apikeys import api_key
+from openai import OpenAIError
+import os
 
 class BrowserAutomation:
     def __init__(self):
@@ -49,22 +53,131 @@ class BrowserAutomation:
     def search_jobs(self):
         self.wait_time_out = 15
         self.wait_variable = W(self.driver, self.wait_time_out)
-        keyword = self.driver.find_element("xpath","//input[@id='keywords-input']" )
-        keyword.send_keys(work)
+        try:
+            keyword = self.driver.find_element("xpath","//input[@id='keywords-input']" )
+            keyword.send_keys(work)
+            sleep(2)
+            pyautogui.press('enter')
+            sleep(2)
+        except:
+            pass
+        try:    
+            location_field = self.driver.find_element("xpath","/html/body/div[1]/div/div[3]/div/div/div/div/div/div/section/div[2]/form/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/input" )
+            location_field.clear() 
+            location_field.send_keys(location_user)
+            print("LOCATION IS GOING GOOD")
+            sleep(2)
+        except Exception as e:
+            print(f"we got an error here: {e}")
+        
+        #touch seek button
+        
+        seek = self.driver.find_element("xpath","//button[@id='searchButton']" )
+        seek.click()
+        print("we find your element")
         sleep(2)
         
-        location = self.driver.find_element("xpath","//input[@id='keywords-input']" )
-        location.send_keys(location)
-        sleep(2)
         
-    def scraper_job(self):
+    def scraper_job_and_apply(self):
         
-    def apply_jobs(self):
+        for i in range (1,23):
+            
+            try:
+                jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
+                jobs.click()
+                
+                quickapply = self.driver.find_element("/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div/div/div[1]/div/a")
+                if quickapply == True:
+                    quickapply.click()
+                else:
+                    pass
+                
+            except Exception as e:
+                print(f"Error while processing job {i}: {e}")
+
+        
+    def next_page(self):
+        return
+        
+class ChatGPTBot(BrowserAutomation):
+    def __init__(self, api_key):
+        super().__init__() 
+        openai.api_key = api_key
+        self.chat_history = []
+
+    def send_message(self, message):
+
+        """Send the message to ChatGPT and return the response."""
+        self.chat_history.append(f"Tú: {message}")
+        print(f"Sending message: {message}")
+
+        try:
+            # Correct usage of the OpenAI API for chat completion
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are an expert in recruiting and talent acquisition."},
+                    {"role": "user", "content": message}
+                ]
+            )
+
+            # Extract the content of the first choice
+            reply = response["choices"][0]["message"]["content"]
+            self.chat_history.append(f"ChatGPT: {reply}")
+            print(f"We got your answer: {reply}")
+            return reply
+
+        except openai.OpenAIError as e:
+            # Handle OpenAI-specific exceptions
+            print(f"An error occurred with OpenAI: {e}")
+            self.chat_history.append(f"Error: Unable to process the request. Reason: {e}")
+            return "An error occurred while processing your request."
+
+        except Exception as e:
+            # Catch unexpected errors
+            print(f"Unexpected error: {e}")
+            self.chat_history.append("An unexpected error occurred.")
+            return "An unexpected error occurred."
+
+    def show_history(self):
+        """show the chat history."""
+        print("\nChat history:")
+        for line in self.chat_history:
+            print(line)
         
 
 
-# Uso de la clase
 if __name__ == "__main__":
-    automation = BrowserAutomation()
-    automation.init_browser()
-    automation.loginn()
+    # Reemplaza con tu API Key de OpenAI
+    API_KEY = api_key
+
+    # Instancia la clase ChatGPTBot, que hereda de BrowserAutomation
+    automation = ChatGPTBot(API_KEY)
+
+    try:
+        # star Chrome and loggin
+        automation.init_browser()
+        automation.loginn()
+
+        # Search jobs
+        print("Searching your deamer job...")
+        automation.search_jobs()
+
+        # Asking ChatGPT
+        print("Asking ChatGPT...")
+        response = automation.send_message("What are the best strategies for screening resumes efficiently?")
+        print(response)
+
+        # show history
+        print("\nchat history ChatGPT:")
+        automation.show_history()
+
+
+    except Exception as e:
+        print(f"Something going wrong: {e}")
+
+    #finally:
+        # Cierra el navegador al finalizar
+    #    automation.close_browser()
+    #    print("Closing windows.")
+    
