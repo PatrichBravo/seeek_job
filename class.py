@@ -96,10 +96,13 @@ class BrowserAutomation:
                 pass
             
             
-    def apply_jobs(self):
+    def enter_application_jobs(self):
         for row in self.rows:
             self.driver.get(row)
             sleep(5)
+            
+            
+            
             try:
             # Wait for all "job-detail-apply" buttons to be present
                 buttons = W(self.driver, 10).until(
@@ -117,6 +120,8 @@ class BrowserAutomation:
                         
             except Exception as e:
                 print(f"Could not find or click the Quick Apply button: {e}")
+                sleep(2)
+                pass
                     # quickapply = self.driver.find_element("/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div/div/div[1]/div/a")
                     # sleep(2)
                     #if quickapply == True:
@@ -124,6 +129,27 @@ class BrowserAutomation:
                     #    sleep(2)
                     #else:
                     #    pass
+    def apply_jobs(self):
+        
+        try:
+            resume = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[2]/fieldset/div/div/div/div[2]/div/input")
+            resume.click()
+            sleep(2)
+            cover_letter = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[3]/fieldset/div/div/div/div[2]/div/input")
+            cover_letter.click()
+            sleep(2)
+            
+            cover_letter_text = self.driver.find_element("id","coverLetter-text-:r6:-description")
+            cover_letter_text_get =cover_letter_text.get_attribute("text")
+            
+            print(cover_letter_text_get)
+
+        except Exception as e:
+            print(f"Error while processing job {i}: {e}")
+        
+        
+        return
+        
 
         
     def next_page(self):
@@ -193,7 +219,7 @@ if __name__ == "__main__":
         print("Searching your deamer job...")
         automation.search_jobs()
         automation.scraper_job()
-        automation.apply_jobs()
+        automation.enter_application_jobs()
         sleep(5)
 
         # Asking ChatGPT
