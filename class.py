@@ -20,6 +20,7 @@ from src.apikeys import api_key
 from openai import OpenAIError
 import os
 from src.cv_txt import cv
+from src.question_and_answer import questions_and_answer
 
 class BrowserAutomation:
     def __init__(self):
@@ -165,25 +166,11 @@ class BrowserAutomation:
             press_continue = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[4]/div/button")
             press_continue.click()
             
-            rights_to_work = self.driver.find_elements("xpath",'//*[@id="question-AU_Q_6_V_9"]/option[11]') #Require sponsorship
-            rights_to_work.click()
+
             
         except Exception as e:
             print(f"Error while processing job: {e}")
-        
-        
-    def questions_and_answer(self):
-        
-        rights = self.driver.find_element(By.ID, "question-AU_Q_6_V_9") 
-        rights_to_work = Select(rights)
-        rights_to_work.select_by_value("AU_Q_6_V_9_A_14978")#Require sponsorship or by visible text
-        
-        
-        
-        
     
-
-        
     def next_page(self):
         return
         
