@@ -19,6 +19,7 @@ import openai
 from src.apikeys import api_key
 from openai import OpenAIError
 import os
+from src.cv_txt import cv
 
 class BrowserAutomation:
     def __init__(self):
@@ -80,7 +81,7 @@ class BrowserAutomation:
         
     def scraper_job(self):
         self.rows = []
-        for i in range (1,23):
+        for i in range (1,3):#23
             
             try:
                 jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
@@ -101,7 +102,8 @@ class BrowserAutomation:
             self.driver.get(row)
             sleep(5)
             
-            
+            self.about_job = self.driver.find_element("xpath","//div[contains(@class, '_47fs8z0') and contains(@class, '_30qf0g0')]")
+            self.about_job_text = self.about_job.text
             
             try:
             # Wait for all "job-detail-apply" buttons to be present
@@ -117,18 +119,14 @@ class BrowserAutomation:
                         print("Quick Apply button clicked successfully!")
                         sleep(5)
                     return  print("No 'Quick Apply' button found.")# Exit after clicking the correct button
-                        
+            #------------------ add function apply_jobs----------------------#   
+            
+            #------------------end of the function---------------------------#         
             except Exception as e:
                 print(f"Could not find or click the Quick Apply button: {e}")
                 sleep(2)
                 pass
-                    # quickapply = self.driver.find_element("/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div/div/div[1]/div[4]/div/div/div/div/div[1]/div/a")
-                    # sleep(2)
-                    #if quickapply == True:
-                    #    quickapply.click()
-                    #    sleep(2)
-                    #else:
-                    #    pass
+
     def apply_jobs(self):
         
         try:
@@ -140,16 +138,50 @@ class BrowserAutomation:
             sleep(2)
             
             cover_letter_text = self.driver.find_element("id","coverLetter-text-:r6:-description")
-            cover_letter_text_get =cover_letter_text.get_attribute("text")
+            cover_letter_text_job = cover_letter_text.text
+            #cover_letter_text_get =cover_letter_text.get_attribute("text")
             
-            print(cover_letter_text_get)
+            message = f"Write a cover letter for this job base on my cv just start with dear manager it have to be simple, about the job: {self.about_job_text} they ask: {cover_letter_text_job} and this is my cv: {cv}" 
+            print(message)
+            
+            self.message_chat = ChatGPTBot(api_key=api_key)
 
+            response = self.message_chat.send_message(message=message)
+            
+            cover_letter_dialog = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[3]/fieldset/div/div/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/textarea")
+            cover_letter_dialog.click()
+            cover_letter_dialog.clear()
+            sleep(1)
+
+           # with pyautogui.hold('ctrl'):  # Press the Shift key down and hold it.
+            #    pyautogui.press('a')   
+            #pyautogui.press('delete')   
+            
+            sleep(2)
+            cover_letter_dialog.send_keys(response)
+            
+            sleep(15)
+            
+            press_continue = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[4]/div/button")
+            press_continue.click()
+            
+            rights_to_work = self.driver.find_elements("xpath",'//*[@id="question-AU_Q_6_V_9"]/option[11]') #Require sponsorship
+            rights_to_work.click()
+            
         except Exception as e:
-            print(f"Error while processing job {i}: {e}")
+            print(f"Error while processing job: {e}")
         
         
-        return
+    def questions_and_answer(self):
         
+        rights = self.driver.find_element(By.ID, "question-AU_Q_6_V_9") 
+        rights_to_work = Select(rights)
+        rights_to_work.select_by_value("AU_Q_6_V_9_A_14978")#Require sponsorship or by visible text
+        
+        
+        
+        
+    
 
         
     def next_page(self):
@@ -220,16 +252,17 @@ if __name__ == "__main__":
         automation.search_jobs()
         automation.scraper_job()
         automation.enter_application_jobs()
+        automation.apply_jobs()
         sleep(5)
 
         # Asking ChatGPT
-        print("Asking ChatGPT...")
-        response = automation.send_message("What are the best strategies for screening resumes efficiently?")
-        print(response)
+        #print("Asking ChatGPT...")
+        #response = automation.send_message("What are the best strategies for screening resumes efficiently?")
+        #print(response)
 
         # show history
-        print("\nchat history ChatGPT:")
-        automation.show_history()
+        #print("\nchat history ChatGPT:")
+        #automation.show_history()
 
 
     except Exception as e:
