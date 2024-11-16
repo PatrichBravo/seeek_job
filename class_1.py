@@ -82,7 +82,7 @@ class BrowserAutomation:
         
     def scraper_job(self):
         self.rows = []
-        for i in range (1,10):#23
+        for i in range (1,5):#23
             
             try:
                 jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
@@ -103,8 +103,15 @@ class BrowserAutomation:
             self.driver.get(row)
             sleep(5)
             
-            self.about_job = self.driver.find_element("xpath","//div[contains(@class, '_47fs8z0') and contains(@class, '_30qf0g0')]")
-            self.about_job_text = self.about_job.text
+            try:
+                self.about_job = self.driver.find_element("xpath","/html/body/div[1]/div/div[3]/div/div/div[2]/div[2]/div/div/div[2]/section[1]/div/div/div")
+                #self.about_job = self.driver.find_element("xpath","//div[contains(@class, '_47fs8z0') and contains(@class, '_30qf0g0')]")
+                self.about_job_text = self.about_job.text
+
+                print('we find your element')
+            except:
+                print(' you are doing something wrong dix your code now!!!!')
+                pass    
             
             try:
             # Wait for all "job-detail-apply" buttons to be present
@@ -164,16 +171,19 @@ class BrowserAutomation:
             cover_letter_dialog.send_keys(response)
             
             sleep(5)
-            try:
-                press_continue = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[4]/div/button")
-                press_continue.click()
-            except:
-                print("i coulnd't find it")
-                pass
+        except Exception as e:
+            print(f"Error while processing job: {e}")
+            pass
+        try:
+            press_continue = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[4]/div/button")
+            press_continue.click()
+        except:
+            print("i coulnd't find it")
+            pass
 
-            sleep(3)
+        sleep(3)
 #------------------------------------trying what is goning wrong---------------------------------------------
-            try:
+        hola =    '''try:
                 #Which of the following statements best describes your right to work in Australia?
                 rights = self.driver.find_element(By.ID, "question-AU_Q_6_V_9")
                 #rights.click()
@@ -276,41 +286,66 @@ class BrowserAutomation:
                 #question-indirect_4ad8449d-0db6-432c-a34e-d0695bd98627_bb22e15e-af85-486a-a898-e76706528c3e_1	No
                 
             except:
-                pass
+                pass'''
 
 
 #------------------------------------end of the code----------------------------------------------------------            
             
             
-            
-            #questions_and_answer(self)
+        try:
+            questions_and_answer(self)
             sleep(5)
-            try:
-                continue_apply = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[4]/div[1]/button")
-                continue_apply.click()
-                sleep(4)
-            except:
-                print(f"i couldnt find {continue_apply}")
-                pass
-            try:
-                continue_update = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button")
-                continue_update.click()
-                sleep(4)
-            except:
-                pass
-            try:
-                submit_apply = self.driver.find_element("xpath", '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button')
-                submit_apply.click()
-                sleep(4)
-            except:
-                pass
+        except:
+            pass
+        
+        try:
+            id_value = self.driver.find_element(By.XPATH, "//div[@class='_5c88ka0 _1alcnf1hz _1alcnf1hv']").get_attribute("id")
+            print(id_value)
+            
+            
+        except:
+            pass
+        
+        try:
+            continue_apply = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[4]/div[1]/button")
+            print('---------------------------------------------------------')
+            print('-------------------------------i find it ...!!!!!!!')
+            print('---------------------------------------------------------')
+            sleep(20)
+            continue_apply.click()
+            sleep(4)
+        except Exception as e:
+            print(f"i couldnt find {e}")
+            pass
+        try:
+            continue_apply_1 = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button")
+            continue_apply_1.click()
+        except:
+            print('You are not doing well')
+            pass
+# Esto imprimirá el valor del ID si existe, o `None` si no está presente.
+
+        #//*[@id="app"]/div/div[1]/div/div/div[3]/div/form/div/div[2]/div[1]/button
+        try:
+            continue_update = self.driver.find_element("xpath", "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button")
+            continue_update.click()
+            sleep(4)
+        except Exception as e:
+            print(f'somthif is going wrong fix it {e}')
+            pass
+        try:
+            submit_apply = self.driver.find_element("xpath", '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button')
+            submit_apply.click()
+            print('we apply to the job :)')
+            sleep(4)
+        except:
+            
+            pass
             
             
 
             
-        except Exception as e:
-            print(f"Error while processing job: {e}")
-            pass
+
     
     def next_page(self):
         return
