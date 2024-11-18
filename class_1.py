@@ -83,7 +83,7 @@ class BrowserAutomation:
         
     def scraper_job(self):
         self.rows = []
-        for i in range (1,1):#23
+        for i in range (1,7):#23
             
             try:
                 jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
@@ -220,9 +220,10 @@ class BrowserAutomation:
 
 #---------------CONTINUES BUTTONS---------------------------------
         xpaths = ["/html/body/div/div/div[1]/div/div/div[3]/div/form/div/div/div[1]/button",
-                '/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[6]/div[1]/button',
+                "/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[6]/div[1]/button",
     "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button",
-    '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button']
+    '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button',
+    '/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[5]/div/button']
 
         for i, xpath_1 in enumerate(xpaths, start=1):
             try:
@@ -326,14 +327,14 @@ if __name__ == "__main__":
         # Search jobs
         print("Searching your deamer job...")
         automation.search_jobs()
-        
-        for pages in range(0,23):
-            new_driver = automation.driver.current_url
+        new_driver = automation.driver.current_url
+        for pages in range(2,5):
+             
             print(new_driver)
             automation.scraper_job()
             automation.enter_application_jobs()
             sleep(2)
-            automation.driver.get(new_driver)
+            automation.driver.get(new_driver+ f"?&page={pages}")
             sleep(2)
             try:
                 automation.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -342,14 +343,14 @@ if __name__ == "__main__":
                 print(f"Error: {e}")
                 
 
-            try:
+            '''try:
                 next_button = W(automation.driver,10).until(EC.presence_of_all_elements_located(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/section[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/nav[1]/ul[1]/li[3]/a[1]/span[1]/span[3]/span[1]"))
                 automation.driver.execute_script("arguments[0].click();", next_button)
             except:
                 print(' yoou made a mistake again Fix it !!!')
-                pass
-            new_driver = automation.driver.current_url
-            print(pages) 
+                pass'''
+            #new_driver = automation.driver.current_url
+            #print(pages) 
 
 
         sleep(5)

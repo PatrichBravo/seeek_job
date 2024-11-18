@@ -113,4 +113,51 @@ def questions_and_answer(self):
         
     except:
         pass
-    
+    try:
+        #How many years' experience do you have as a Business Intelligence Analytics Consultant?
+        bus_int_exp = self.driver.find_element(By.ID, "question-AU_Q_63C65D2B02CF667945308F559E1FCB5A_V") 
+        bus_int_exp = Select(rights)
+        bus_int_exp.select_by_value("AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_3")
+        
+        #Option Text: No experience
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_1
+        #Option Text: Less than 1 year
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_2
+        #Option Text: 1 year
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_3
+        #Option Text: 2 years
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_4
+        #Option Text: 3 years
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_5
+        #Option Text: 4 years
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_6
+        #Option Text: 5 years
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_7
+        #Option Text: More than 5 years
+        #Option ID: AU_Q_63C65D2B02CF667945308F559E1FCB5A_V_1_A_63C65D2B02CF667945308F559E1FCB5A_8
+    except:
+        pass
+    try:
+        real_int_exp = self.driver.find_element(By.ID, "question-AU_Q_1113_V_2") 
+        real_int_exp = Select(rights)
+        real_int_exp.select_by_value("AU_Q_1113_V_2_A_20932")
+        #Option Text: No experience
+        #Option ID: AU_Q_1113_V_2_A_20931
+        #Option Text: Less than 1 year
+        #Option ID: AU_Q_1113_V_2_A_20932
+        #Option Text: 1 year
+        #Option ID: AU_Q_1113_V_2_A_20933
+        #Option Text: 2 years
+        #Option ID: AU_Q_1113_V_2_A_20934
+        #Option Text: 3 years
+        #Option ID: AU_Q_1113_V_2_A_20935
+        #Option Text: 4 years
+        #Option ID: AU_Q_1113_V_2_A_20936
+        #Option Text: 5 years
+        #Option ID: AU_Q_1113_V_2_A_20937
+        #Option Text: More than 5 years
+        #Option ID: AU_Q_1113_V_2_A_20938
+    except:
+        pass
+        
+        
