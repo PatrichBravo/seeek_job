@@ -21,6 +21,7 @@ from openai import OpenAIError
 import os
 from src.cv_txt import cv
 from src.question_and_answer import questions_and_answer
+from selenium.common.exceptions import NoSuchElementException
 
 class BrowserAutomation:
     def __init__(self):
@@ -82,26 +83,42 @@ class BrowserAutomation:
         
     def scraper_job(self):
         self.rows = []
-        for i in range (1,5):#23
+        for i in range (1,1):#23
             
             try:
                 jobs = self.driver.find_element("xpath", "/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div[3]/div["+str(i)+"]/article/div[2]/a")
                 jobs.click()
                 sleep(2)
+                
+                
+                #jobs_href = jobs.get_attribute("href")
+                #self.rows.append(jobs_href)
+                #sleep(2)
+                #print(self.rows)
+                #try:
                 try:
                     status = self.driver.find_element("xpath","/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/span/span/span[2]")
                     status_text = status.text
+                except:
+                    pass
+                try:
                     if "You applied" in status_text:
                         print(f"Skipping job {i} because status is: {status_text}")
                         continue
 
-                    jobs_href = jobs.get_attribute("href")
-                    self.rows.append(jobs_href)
-                    sleep(2)
-                    print(self.rows)
-                
                 except:
                     pass
+                
+                print("algo va mal")
+                jobs_href = jobs.get_attribute("href")
+                self.rows.append(jobs_href)
+                sleep(2)
+                print(self.rows)
+
+
+                    
+                #except:
+                #    pass
             except Exception as e:
                 print(f"Error while processing job {i}: {e}")                        
         else:
@@ -120,7 +137,7 @@ class BrowserAutomation:
 
                 print('we find your element')
             except:
-                print(' you are doing something wrong dix your code now!!!!')
+                print(' you are doing something wrong fix your code now!!!!')
                 pass    
             
             try:
@@ -143,6 +160,7 @@ class BrowserAutomation:
                 print(f"Could not find or click the Quick Apply button: {e}")
                 sleep(2)
                 pass
+
              #------------------ add function apply_jobs----------------------#   
             BrowserAutomation.apply_jobs(self)          
             #------------------end of the function---------------------------# 
@@ -161,7 +179,7 @@ class BrowserAutomation:
             cover_letter_text_job = cover_letter_text.text
             #cover_letter_text_get =cover_letter_text.get_attribute("text")
             
-            message = f"Write a cover letter for this job base on my cv just start with dear manager it have to be simple, about the job: {self.about_job_text} they ask: {cover_letter_text_job} and this is my cv: {cv}" 
+            message = f"Write a cover letter for this job base on my cv just start with dear manager it have to be simple, and also put my name at the end Patrich Bravo, dont pu anything in []. about the job: {self.about_job_text} they ask: {cover_letter_text_job} and this is my cv: {cv}" 
             print(message)
             
             self.message_chat = ChatGPTBot(api_key=api_key)
@@ -201,16 +219,20 @@ class BrowserAutomation:
 #------------------------END QUESTION AND ANSWERS-----------------------
 
 #---------------CONTINUES BUTTONS---------------------------------
-        xpaths = ["//button[@data-testid='continue-button']",
+        xpaths = ["/html/body/div/div/div[1]/div/div/div[3]/div/form/div/div/div[1]/button",
+                '/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[6]/div[1]/button',
     "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button",
-    "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button",
-    '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button',
-    '/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[4]/div[1]/button[1]']
+    '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button']
 
-        for i, xpath in enumerate(xpaths, start=1):
+        for i, xpath_1 in enumerate(xpaths, start=1):
             try:
-                BrowserAutomation.scroll_down(driver=self.driver, scroll_by=500, max_attempts=20, button_xpath=xpath)
+                find_xpth = self.driver.find_element(By.XPATH,xpath_1)
+                BrowserAutomation.scroll_down(driver=self.driver, scroll_by=500, max_attempts=20, button_xpath=xpath_1)
                 sleep(5)
+                #if find_xpth == True:             
+                #    BrowserAutomation.scroll_down(driver=self.driver, scroll_by=500, max_attempts=20, button_xpath=xpath_1)
+                #    sleep(5)
+                #print(f"we could, find {xpath_1}, Number{i}")
             except Exception as e:
                 print(f"Error with button {i}: {e}")
                 pass
@@ -304,8 +326,31 @@ if __name__ == "__main__":
         # Search jobs
         print("Searching your deamer job...")
         automation.search_jobs()
-        automation.scraper_job()
-        automation.enter_application_jobs()
+        
+        for pages in range(0,23):
+            new_driver = automation.driver.current_url
+            print(new_driver)
+            automation.scraper_job()
+            automation.enter_application_jobs()
+            sleep(2)
+            automation.driver.get(new_driver)
+            sleep(2)
+            try:
+                automation.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                sleep(2)
+            except Exception as e:
+                print(f"Error: {e}")
+                
+
+            try:
+                next_button = W(automation.driver,10).until(EC.presence_of_all_elements_located(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/section[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/nav[1]/ul[1]/li[3]/a[1]/span[1]/span[3]/span[1]"))
+                automation.driver.execute_script("arguments[0].click();", next_button)
+            except:
+                print(' yoou made a mistake again Fix it !!!')
+                pass
+            new_driver = automation.driver.current_url
+            print(pages) 
+
 
         sleep(5)
 
