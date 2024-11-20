@@ -28,7 +28,9 @@ if LOG_CONFIG[LOG_TO_FILE] :
         rotation="10 MB",
         retention="1 week",
         compression="zip",
-        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+           "<level>{level}</level> | "
+           "<cyan>{message}</cyan>",
         backtrace=True,
         diagnose=True
     )
@@ -38,7 +40,9 @@ if LOG_CONFIG[LOG_TO_CONSOLE]:
     logger.add(
         sys.stderr,
         level=LOG_CONFIG[MINIMUM_LOG_LEVEL],
-        format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+           "<level>{level}</level> | "
+           "<cyan>{message}</cyan>",
         backtrace=True,
         diagnose=True
     )

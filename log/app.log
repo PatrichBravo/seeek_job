@@ -619,3 +619,47 @@
 2024-11-19 21:46:11.172 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
 2024-11-19 21:46:11.173 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
 2024-11-19 21:46:11.173 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:02:27.551 | DEBUG    | src.utils:chrome_browser_options:102 - Setting Chrome browser options
+2024-11-19 22:02:27.557 | DEBUG    | src.utils:ensure_chrome_profile:10 - Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:02:27.557 | DEBUG    | src.utils:chrome_browser_options:136 - Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:17:39 | DEBUG | Setting Chrome browser options
+2024-11-19 22:17:39 | DEBUG | Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:17:39 | DEBUG | Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:18:08 | INFO | Searching your deamer job...
+2024-11-19 22:28:14 | DEBUG | hello
+2024-11-19 22:32:17 | DEBUG | Setting Chrome browser options
+2024-11-19 22:32:17 | DEBUG | Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:32:17 | DEBUG | Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:32:24 | INFO | Press enter when you log in..!!
+2024-11-19 22:32:29 | INFO | Login completed and browser maximized!
+2024-11-19 22:32:29 | INFO | Searching your deamer job...
+2024-11-19 22:32:35 | INFO | LOCATION IS GOING GOOD
+2024-11-19 22:32:37 | INFO | we find your element
+2024-11-19 22:34:13 | DEBUG | hello
+2024-11-19 22:34:21 | DEBUG | Setting Chrome browser options
+2024-11-19 22:34:21 | DEBUG | Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:34:21 | DEBUG | Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:34:43 | INFO | 
+2024-11-19 22:34:48 | INFO | Login completed and browser maximized!
+2024-11-19 22:34:48 | INFO | Searching your deamer job...
+2024-11-19 22:34:53 | INFO | LOCATION IS GOING GOOD
+2024-11-19 22:37:51 | DEBUG | hello
+2024-11-19 22:37:55 | DEBUG | Setting Chrome browser options
+2024-11-19 22:37:55 | DEBUG | Ensuring Chrome profile exists at path: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:37:55 | DEBUG | Using Chrome profile directory: /Users/patrichbravo/Desktop/Python uso diario/seeek_job/chrome_profile/seek_profile
+2024-11-19 22:38:09 | INFO | 
+2024-11-19 22:38:14 | INFO | Login completed and browser maximized!
+2024-11-19 22:38:14 | INFO | Searching your deamer job...
+2024-11-19 22:38:19 | INFO | LOCATION IS GOING GOOD
+2024-11-19 22:38:22 | INFO | we find your element
+2024-11-19 22:38:28 | DEBUG | ['https://www.seek.com.au/job/80269488?type=promoted&ref=search-standalone&origin=jobCard#sol=bc4c3169bf67a5a83e4a4f386ba25080ecf52978']
+2024-11-19 22:38:32 | DEBUG | ['https://www.seek.com.au/job/80269488?type=promoted&ref=search-standalone&origin=jobCard#sol=bc4c3169bf67a5a83e4a4f386ba25080ecf52978', 'https://www.seek.com.au/job/80287585?type=promoted&ref=search-standalone&origin=jobCard#sol=a6eae9ba59022d5a8ed956467abbe7612833920f']
+2024-11-19 22:39:36 | DEBUG | hello
+2024-11-19 22:40:08 | DEBUG | hello
+2024-11-19 22:40:14 | INFO | NOW 
+2024-11-19 22:40:27 | DEBUG | hello
+2024-11-19 22:40:32 | INFO | THANK YOU 
+2024-11-19 22:41:41 | DEBUG | hello
+2024-11-19 22:41:44 | INFO | Now I’ll start working for you.  
+2024-11-19 22:42:22 | DEBUG | hello
+2024-11-19 22:42:25 | INFO | NOW I’LL START WORKING FOR YOU. 

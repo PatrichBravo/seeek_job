@@ -23,6 +23,9 @@ from src.cv_txt import cv
 from src.question_and_answer import questions_and_answer
 from selenium.common.exceptions import NoSuchElementException
 from class_1 import ChatGPTBot
+from src.logging import logger
+
+
 
 
      
@@ -37,7 +40,7 @@ try:
     automation.loginn()
 
     # Search jobs
-    print("Searching your deamer job...")
+    logger.info("Searching your deamer job...")
     automation.search_jobs()
     new_driver = automation.driver.current_url
     for pages in range(2,5):
@@ -52,7 +55,7 @@ try:
             automation.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(2)
         except Exception as e:
-            print(f"Error: {e}")
+            logger.error(f"Error: {e}")
             
 
 

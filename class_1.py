@@ -22,6 +22,7 @@ import os
 from src.cv_txt import cv
 from src.question_and_answer import questions_and_answer
 from selenium.common.exceptions import NoSuchElementException
+from src.logging import logger
 
 class BrowserAutomation:
     def __init__(self):
@@ -44,14 +45,14 @@ class BrowserAutomation:
         
         self.driver.get('https://login.seek.com/login?state=hKFo2SAzLWdoSVBpNnJleWp6cEZ0cW1IeFZJbU9ZTTFJS2FaRKFupWxvZ2luo3RpZNkgR3hJZ3loYmdiazN3a2hHeWNqU0RnR2p6dU5QWjk0RGOjY2lk2SB5R0JWZ2U2Nks1TkpwU041dTcxZlU5MFZjVGxFQVNOdQ&client=yGBVge66K5NJpSN5u71fU90VcTlEASNu&protocol=oauth2&redirect_uri=https%3A%2F%2Fwww.seek.com.au%2Foauth%2Fcallback%2F&scope=openid%20profile%20email%20offline_access&audience=https%3A%2F%2Fseek%2Fapi%2Fcandidate&fragment=%2Foauth%2Flogin%3Flocale%3Dau%26language%3Den%26realm%3DUsername-Password-Authentication%26da_cdt%3Dvisid_01931366de6c000523dae529aa3305075003906d00942-sesid_1731197329007-hbvid_81b41409_b72c_4aed_a211_9c0183ec5bf1-tempAcqSessionId_1731197329009-tempAcqVisitorId_81b41409b72c4aeda2119c0183ec5bf1&ui_locales=en&JobseekerSessionId=cf618dba-afe0-4ff5-8d44-7a8c9be7a72d&language=en-AU&response_type=code&response_mode=query&nonce=c2NVQkxQbjl6MzA1VC5TUzZhUFYwdnNFN1pjU1JEZkhVZGNrOXVTcS5xRw%3D%3D&code_challenge=izRMkFftM_hVrAUkIceIiJCaIVHj6P-eFBUXstHI_d4&code_challenge_method=S256&auth0Client=eyJuYW1lIjoiYXV0aDAtc3BhLWpzIiwidmVyc2lvbiI6IjEuMjIuMyJ9#/login?locale=au&language=en&realm=Username-Password-Authentication&da_cdt=visid_01931366de6c000523dae529aa3305075003906d00942-sesid_1731197329007-hbvid_81b41409_b72c_4aed_a211_9c0183ec5bf1-tempAcqSessionId_1731197329009-tempAcqVisitorId_81b41409b72c4aeda2119c0183ec5bf1')  # URL completo
         self.driver.maximize_window()
-        
-        input('Press enter when you log in..!!')
+        press = input("PRESS ENTER WHEN YOU LOG IN..!!")
+        logger.info(f'NOW I’LL START WORKING FOR YOU. {press}')
 
         sleep(5)
         
         self.wait_time_out = 15
         self.wait_variable = W(self.driver, self.wait_time_out)
-        print("Login completed and browser maximized!")
+        logger.info("Login completed and browser maximized!")
         
     def search_jobs(self):
         self.wait_time_out = 15
@@ -68,16 +69,16 @@ class BrowserAutomation:
             location_field = self.driver.find_element("xpath","/html/body/div[1]/div/div[3]/div/div/div/div/div/div/section/div[2]/form/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/input" )
             location_field.clear() 
             location_field.send_keys(location_user)
-            print("LOCATION IS GOING GOOD")
+            logger.info("LOCATION IS GOING GOOD")
             sleep(2)
         except Exception as e:
-            print(f"we got an error here: {e}")
+            logger.critical(f"we got an error here: {e}")
         
         #touch seek button
         
         seek = self.driver.find_element("xpath","//button[@id='searchButton']" )
         seek.click()
-        print("we find your element")
+        logger.info("we find your element")
         sleep(2)
         
         
@@ -97,7 +98,7 @@ class BrowserAutomation:
                     pass
                 try:
                     if "You applied" in status_text:
-                        print(f"Skipping job {i} because status is: {status_text}")
+                        logger.info(f"Skipping job {i} because status is: {status_text}")
                         continue
 
                 except:
@@ -107,11 +108,11 @@ class BrowserAutomation:
                 jobs_href = jobs.get_attribute("href")
                 self.rows.append(jobs_href)
                 sleep(2)
-                print(self.rows)
+                logger.debug(self.rows)
                 
 
             except Exception as e:
-                print(f"Error while processing job {i}: {e}")                        
+                logger.critical(f"Error while processing job {i}: {e}")                        
         else:
                 pass
             
@@ -126,9 +127,9 @@ class BrowserAutomation:
                 #self.about_job = self.driver.find_element("xpath","//div[contains(@class, '_47fs8z0') and contains(@class, '_30qf0g0')]")
                 self.about_job_text = self.about_job.text
 
-                print('we find your element')
+                logger.info('we find your element')
             except:
-                print(' you are doing something wrong fix your code now!!!!')
+                logger.critical(' you are doing something wrong fix your code now!!!!')
                 pass    
             
             try:
@@ -142,13 +143,13 @@ class BrowserAutomation:
                     # Scroll into view and click the correct button
                         self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
                         button.click()
-                        print("Quick Apply button clicked successfully!")
+                        logger.info("Quick Apply button clicked successfully!")
                         sleep(5)
                     else:  print("No 'Quick Apply' button found.")
                         # Exit after clicking the correct button
                    
             except Exception as e:
-                print(f"Could not find or click the Quick Apply button: {e}")
+                logger.info(f"Could not find or click the Quick Apply button: {e}")
                 sleep(2)
                 pass
 
@@ -171,7 +172,7 @@ class BrowserAutomation:
             #cover_letter_text_get =cover_letter_text.get_attribute("text")
             
             message = f"Write a cover letter for this job base on my cv just start with dear manager it have to be simple, and also put my name at the end Patrich Bravo, dont pu anything in []. about the job: {self.about_job_text} they ask: {cover_letter_text_job} and this is my cv: {cv}" 
-            print(message)
+            logger.debug(message)
             
             self.message_chat = ChatGPTBot(api_key=api_key)
 
@@ -186,13 +187,13 @@ class BrowserAutomation:
             
             sleep(5)
         except Exception as e:
-            print(f"Error while processing job: {e}")
+            logger.critical(f"Error while processing job: {e}")
             pass
         try:
             press_continue = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[4]/div/button")
             press_continue.click()
         except:
-            print("i coulnd't find it")
+            logger.critical("i coulnd't find it")
             pass
 
         sleep(3)
@@ -233,20 +234,20 @@ class BrowserAutomation:
             try:
                 # Locate the button by XPath
                 button = driver.find_element(By.XPATH, button_xpath)
-                print(f"Button found after {attempt} scroll attempts!")
+                logger.debug(f"Button found after {attempt} scroll attempts!")
                 
                 # Scroll to the button
                 driver.execute_script("arguments[0].scrollIntoView(true);", button)
                 
                 # Click the button
                 button.click()
-                print("Button clicked successfully!")
+                logger.debug("Button clicked successfully!")
                 return True
             except Exception as e:
                 # If button not found, scroll down by the specified pixels
                 driver.execute_script(f"window.scrollBy(0, {scroll_by});")
-                print(f"Scrolled {scroll_by} pixels. Attempt {attempt + 1}/{max_attempts}")
-        print("Button not found after maximum scroll attempts.")
+                logger.debug(f"Scrolled {scroll_by} pixels. Attempt {attempt + 1}/{max_attempts}")
+        logger.debug("Button not found after maximum scroll attempts.")
         
                
 class ChatGPTBot(BrowserAutomation):
@@ -259,7 +260,7 @@ class ChatGPTBot(BrowserAutomation):
 
         """Send the message to ChatGPT and return the response."""
         self.chat_history.append(f"Tú: {message}")
-        print(f"Sending message: {message}")
+        logger.debug(f"Sending message: {message}")
 
         try:
             # Correct usage of the OpenAI API for chat completion
@@ -274,29 +275,31 @@ class ChatGPTBot(BrowserAutomation):
             # Extract the content of the first choice
             reply = response["choices"][0]["message"]["content"]
             self.chat_history.append(f"ChatGPT: {reply}")
-            print(f"We got your answer: {reply}")
+            logger.debug(f"We got your answer: {reply}")
             return reply
 
         except openai.OpenAIError as e:
             # Handle OpenAI-specific exceptions
-            print(f"An error occurred with OpenAI: {e}")
+            logger.critical(f"An error occurred with OpenAI: {e}")
             self.chat_history.append(f"Error: Unable to process the request. Reason: {e}")
             return "An error occurred while processing your request."
 
         except Exception as e:
             # Catch unexpected errors
-            print(f"Unexpected error: {e}")
+            logger.critical(f"Unexpected error: {e}")
             self.chat_history.append("An unexpected error occurred.")
             return "An unexpected error occurred."
 
     def show_history(self):
         """show the chat history."""
-        print("\nChat history:")
+        logger.debug("\nChat history:")
         for line in self.chat_history:
-            print(line)
+            logger.debug(line)
         
 
 
 if __name__ == "__main__":
  
-    print('hello')
+    logger.debug('hello')
+    press = input("PRESS ENTER WHEN YOU LOG IN..!!")
+    logger.info(f'NOW I’LL START WORKING FOR YOU. {press}')
