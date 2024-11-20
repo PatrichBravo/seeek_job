@@ -90,12 +90,6 @@ class BrowserAutomation:
                 jobs.click()
                 sleep(2)
                 
-                
-                #jobs_href = jobs.get_attribute("href")
-                #self.rows.append(jobs_href)
-                #sleep(2)
-                #print(self.rows)
-                #try:
                 try:
                     status = self.driver.find_element("xpath","/html/body/div[1]/div/div[3]/div/section/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[3]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/span/span/span[2]")
                     status_text = status.text
@@ -109,16 +103,13 @@ class BrowserAutomation:
                 except:
                     pass
                 
-                print("algo va mal")
+
                 jobs_href = jobs.get_attribute("href")
                 self.rows.append(jobs_href)
                 sleep(2)
                 print(self.rows)
+                
 
-
-                    
-                #except:
-                #    pass
             except Exception as e:
                 print(f"Error while processing job {i}: {e}")                        
         else:
@@ -189,13 +180,8 @@ class BrowserAutomation:
             cover_letter_dialog = self.driver.find_element("xpath","/html/body/div[1]/div/div[1]/div/div/div[3]/div[2]/div[3]/fieldset/div/div/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/textarea")
             cover_letter_dialog.click()
             cover_letter_dialog.clear()
-            sleep(1)
-
-           # with pyautogui.hold('ctrl'):  # Press the Shift key down and hold it.
-            #    pyautogui.press('a')   
-            #pyautogui.press('delete')   
             
-            sleep(2)
+            sleep(3)
             cover_letter_dialog.send_keys(response)
             
             sleep(5)
@@ -223,7 +209,9 @@ class BrowserAutomation:
                 "/html/body/div[1]/div/div[1]/div/div/div[3]/div/form/div/div[6]/div[1]/button",
     "/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[6]/div[1]/button",
     '//*[@id="app"]/div/div[1]/div/div/div[3]/div/div[5]/div/button',
-    '/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[5]/div/button']
+    '/html/body/div[1]/div/div[1]/div/div/div[3]/div/div[5]/div/button',
+    '/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[4]/div[1]/button[1]']
+        
 
         for i, xpath_1 in enumerate(xpaths, start=1):
             try:
@@ -259,11 +247,8 @@ class BrowserAutomation:
                 driver.execute_script(f"window.scrollBy(0, {scroll_by});")
                 print(f"Scrolled {scroll_by} pixels. Attempt {attempt + 1}/{max_attempts}")
         print("Button not found after maximum scroll attempts.")
-
-    
-    def next_page(self):
-        return
         
+               
 class ChatGPTBot(BrowserAutomation):
     def __init__(self, api_key):
         super().__init__() 
@@ -313,63 +298,5 @@ class ChatGPTBot(BrowserAutomation):
 
 
 if __name__ == "__main__":
-    # Reemplaza con tu API Key de OpenAI
-    API_KEY = api_key
-
-    # Instancia la clase ChatGPTBot, que hereda de BrowserAutomation
-    automation = ChatGPTBot(API_KEY)
-
-    try:
-        # star Chrome and loggin
-        automation.init_browser()
-        automation.loginn()
-
-        # Search jobs
-        print("Searching your deamer job...")
-        automation.search_jobs()
-        new_driver = automation.driver.current_url
-        for pages in range(2,5):
-             
-            print(new_driver)
-            automation.scraper_job()
-            automation.enter_application_jobs()
-            sleep(2)
-            automation.driver.get(new_driver+ f"?&page={pages}")
-            sleep(2)
-            try:
-                automation.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                sleep(2)
-            except Exception as e:
-                print(f"Error: {e}")
-                
-
-            '''try:
-                next_button = W(automation.driver,10).until(EC.presence_of_all_elements_located(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/section[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/nav[1]/ul[1]/li[3]/a[1]/span[1]/span[3]/span[1]"))
-                automation.driver.execute_script("arguments[0].click();", next_button)
-            except:
-                print(' yoou made a mistake again Fix it !!!')
-                pass'''
-            #new_driver = automation.driver.current_url
-            #print(pages) 
-
-
-        sleep(5)
-
-        # Asking ChatGPT
-        #print("Asking ChatGPT...")
-        #response = automation.send_message("What are the best strategies for screening resumes efficiently?")
-        #print(response)
-
-        # show history
-        #print("\nchat history ChatGPT:")
-        #automation.show_history()
-
-
-    except Exception as e:
-        print(f"Something going wrong: {e}")
-
-    #finally:
-        # Cierra el navegador al finalizar
-    #    automation.close_browser()
-    #    print("Closing windows.")
-    
+ 
+    print('hello')
