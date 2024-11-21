@@ -159,5 +159,60 @@ def questions_and_answer(self):
         #Option ID: AU_Q_1113_V_2_A_20938
     except:
         pass
+    
+    try:
+        #How would you rate your English language skills?
+        english_exp = self.driver.find_element(By.XPATH, '//*[@id="question-AU_Q_122_V_2_1"]') 
+        english_exp.click()
+        #Limited proficiency
+        #//*[@id="question-AU_Q_122_V_2_0"]
+        #Professional working proficiency
+        #//*[@id="question-AU_Q_122_V_2_1"]
+        #Native or Bilingual proficiency
+        #//*[@id="question-AU_Q_122_V_2_2"]
+        
+    except:
+        pass
+        
+    try:
+        #Have you completed a qualification in mathematics / mathematical science?
+        completed_math = self.driver.find_element(By.ID, "AU_Q_1080_V_3") 
+        completed_math = Select(rights)
+        completed_math.select_by_value("AU_Q_1080_V_3_A_26973")
+        
+        #AU_Q_1080_V_3_A_26978	Yes, Diploma
+        #AU_Q_1080_V_3_A_26977	Yes, Associate Degree
+        #AU_Q_1080_V_3_A_26979	Yes, Bachelor Degree
+        #AU_Q_1080_V_3_A_26980	Yes, Bachelor Degree (Honours)
+        #AU_Q_1080_V_3_A_26971	Yes, Graduate Certificate
+        #AU_Q_1080_V_3_A_26972	Yes, Graduate Diploma
+        #AU_Q_1080_V_3_A_26970	Yes, Masters Degree
+        #AU_Q_1080_V_3_A_26974	Yes, Doctoral Degree
+        #AU_Q_1080_V_3_A_26973	I have a qualification in mathematics which isn't listed
+        #AU_Q_1080_V_3_A_26975	I don't have a qualification in mathematics
+        
+    except:
+        pass
+    
+    try:
+        #Have you completed a qualification in science?
+        completed_sience = self.driver.find_element(By.ID, "AU_Q_1078_V_2") 
+        completed_sience = Select(rights)
+        completed_sience.select_by_value("AU_Q_1078_V_2_A_27078")
+        
+        #AU_Q_1078_V_2_A_27068	Yes, Diploma
+        #AU_Q_1078_V_2_A_27069	Yes, Advanced Diploma
+        #AU_Q_1078_V_2_A_27070	Yes, Associate Degree
+        #AU_Q_1078_V_2_A_27071	Yes, Bachelor Degree
+        #AU_Q_1078_V_2_A_27072	Yes, Bachelor Degree (Honours)
+        #AU_Q_1078_V_2_A_27074	Yes, Graduate Certificate
+        #AU_Q_1078_V_2_A_27075	Yes, Graduate Diploma
+        #AU_Q_1078_V_2_A_27073	Yes, Masters Degree
+        #AU_Q_1078_V_2_A_27077	Yes, Doctoral Degree
+        #AU_Q_1078_V_2_A_27076	I have a qualification in science which isn't listed
+        #AU_Q_1078_V_2_A_27078	I don't have a qualification in science
+        
+    except:
+        pass
         
         
