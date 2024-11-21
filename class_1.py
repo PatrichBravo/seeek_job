@@ -224,7 +224,7 @@ class BrowserAutomation:
                 #    sleep(5)
                 #print(f"we could, find {xpath_1}, Number{i}")
             except Exception as e:
-                print(f"Error with button {i}: {e}")
+                logger.critical(f"Error with button {i}: {e}")
                 pass
         
  #-----------------------------------END CONTINUES BUTTONS--------------------------------------

@@ -1,2 +1,6 @@
 chrome_profile
 src/apikeys.py
+log/app.log
+/Users/patrichbravo/Desktop/Python uso diario/seeek_job/log
+__pycache__
+src/__pycache__
